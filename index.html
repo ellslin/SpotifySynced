@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone - Synched</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Weather Effects Container -->
+    <div id="weather-effects" class="weather-effects"></div>
+    
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <svg viewBox="0 0 1134 340" class="spotify-logo">
+                    <path fill="currentColor" d="M8 171c0 92 76 168 168 168s168-76 168-168S268 4 176 4 8 79 8 171zm230 78c-39-24-89-37-147-42-6 0-12 5-12 12 0 6 5 11 11 12 54 5 100 17 134 40 4 2 7 3 10 3 7 0 13-6 13-13 0-5-2-9-9-12zm17-45c-45-28-114-44-167-44-14 0-21 8-21 18 0 8 6 16 14 16 52 0 110 15 150 40 4 2 7 4 11 4 10 0 18-8 18-18 0-7-4-13-5-16zm20-51c-52-31-137-49-185-49-17 0-26 10-26 22 0 10 8 20 18 20 66 0 132 15 178 46 4 2 8 4 13 4 10 0 20-9 20-21 0-9-5-17-18-22z"/>
+                </svg>
+                <span>Spotify</span>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="#" class="nav-item active" data-page="home">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1h-6.5a1 1 0 0 1-1-1v-6h-3v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z"/></svg>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item" data-page="search">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z"/></svg>
+                    <span>Search</span>
+                </a>
+                <a href="#" class="nav-item" data-page="library">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"/></svg>
+                    <span>Your Library</span>
+                </a>
+                <a href="#" class="nav-item synched-nav" data-page="synched">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span>Synched</span>
+                    <span class="synched-badge">NEW</span>
+                </a>
+                <a href="#" class="nav-item lock-nav" data-page="lock">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                    <span>Lock</span>
+                    <span class="lock-badge">FOCUS</span>
+                </a>
+            </nav>
+
+            <div class="playlist-section">
+                <div class="section-header">
+                    <h3>Your Playlists</h3>
+                    <button class="add-playlist-btn">+</button>
+                </div>
+                <div class="playlist-list">
+                    <div class="playlist-item">
+                        <div class="playlist-thumb gradient-1"></div>
+                        <span>Liked Songs</span>
+                    </div>
+                    <div class="playlist-item">
+                        <div class="playlist-thumb gradient-2"></div>
+                        <span>Chill Vibes</span>
+                    </div>
+                    <div class="playlist-item">
+                        <div class="playlist-thumb gradient-3"></div>
+                        <span>Workout Mix</span>
+                    </div>
+                    <div class="playlist-item">
+                        <div class="playlist-thumb gradient-4"></div>
+                        <span>Focus Flow</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <section class="page active" id="home-page">
+                <header class="content-header">
+                    <div class="nav-arrows">
+                        <button class="arrow-btn">&lt;</button>
+                        <button class="arrow-btn">&gt;</button>
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <div class="user-avatar">E</div>
+                            <span>Emma</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="greeting-section">
+                    <h1 class="greeting">Good evening</h1>
+                    <div class="quick-picks">
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img gradient-liked"></div>
+                            <span>Liked Songs</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273c5716278abba6a103ad3d5b9') center/cover;"></div>
+                            <span>Daily Mix 1</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img" style="background: url('https://i.scdn.co/image/ab67616d0000b27357756e5c40022297e7a4d8ca') center/cover;"></div>
+                            <span>Discover Weekly</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273879e9318cb9f4e05ee552ac9') center/cover;"></div>
+                            <span>Release Radar</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img gradient-chill"></div>
+                            <span>Chill Hits</span>
+                        </div>
+                        <div class="quick-pick-card">
+                            <div class="quick-pick-img gradient-workout"></div>
+                            <span>Workout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="content-section">
+                    <div class="section-header-row">
+                        <h2>Made for you</h2>
+                        <a href="#" class="show-all">Show all</a>
+                    </div>
+                    <div class="card-grid">
+                        <div class="music-card">
+                            <div class="card-img" style="background: linear-gradient(135deg, #1e3a5f, #4a7c9b);"></div>
+                            <h3>Daily Mix 1</h3>
+                            <p>Drake, The Weeknd, Post Malone and more</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: linear-gradient(135deg, #5c3d6e, #9b4dca);"></div>
+                            <h3>Daily Mix 2</h3>
+                            <p>Dua Lipa, Ariana Grande, Billie Eilish</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: linear-gradient(135deg, #2d5016, #5fa02d);"></div>
+                            <h3>Daily Mix 3</h3>
+                            <p>Tyler, the Creator, Kendrick Lamar</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: linear-gradient(135deg, #8b2942, #e74c3c);"></div>
+                            <h3>Daily Mix 4</h3>
+                            <p>Bad Bunny, J Balvin, Daddy Yankee</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: linear-gradient(135deg, #1a1a2e, #4a4e69);"></div>
+                            <h3>Daily Mix 5</h3>
+                            <p>Radiohead, Arctic Monkeys, Tame Impala</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-header-row">
+                        <h2>Recently played</h2>
+                        <a href="#" class="show-all">Show all</a>
+                    </div>
+                    <div class="card-grid">
+                        <div class="music-card">
+                            <div class="card-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273b1c4b76e23414c9f20242268') center/cover;"></div>
+                            <h3>Blinding Lights</h3>
+                            <p>The Weeknd</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273a91c10fe9472d9bd89802e5a') center/cover;"></div>
+                            <h3>Anti-Hero</h3>
+                            <p>Taylor Swift</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: url('https://i.scdn.co/image/ab67616d0000b2732e8ed79e177ff6011076f5f0') center/cover;"></div>
+                            <h3>Flowers</h3>
+                            <p>Miley Cyrus</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647') center/cover;"></div>
+                            <h3>As It Was</h3>
+                            <p>Harry Styles</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card">
+                            <div class="card-img" style="background: url('https://i.scdn.co/image/ab67616d0000b27333b8541201f1ef38941024be') center/cover;"></div>
+                            <h3>Heat Waves</h3>
+                            <p>Glass Animals</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-header-row">
+                        <h2>Popular artists</h2>
+                        <a href="#" class="show-all">Show all</a>
+                    </div>
+                    <div class="card-grid">
+                        <div class="music-card artist-card">
+                            <div class="card-img round" style="background: url('https://i.scdn.co/image/ab6761610000e5eb4293385d324db8558179afd9') center/cover;"></div>
+                            <h3>Drake</h3>
+                            <p>Artist</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card artist-card">
+                            <div class="card-img round" style="background: url('https://i.scdn.co/image/ab6761610000e5ebcdce7620dc940db079bf4952') center/cover;"></div>
+                            <h3>Taylor Swift</h3>
+                            <p>Artist</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card artist-card">
+                            <div class="card-img round" style="background: url('https://i.scdn.co/image/ab6761610000e5eb859e4c14fa59296c8649e0e4') center/cover;"></div>
+                            <h3>The Weeknd</h3>
+                            <p>Artist</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card artist-card">
+                            <div class="card-img round" style="background: url('https://i.scdn.co/image/ab6761610000e5eb12a2ef08d00dd7451a6dbed6') center/cover;"></div>
+                            <h3>Billie Eilish</h3>
+                            <p>Artist</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                        <div class="music-card artist-card">
+                            <div class="card-img round" style="background: url('https://i.scdn.co/image/ab6761610000e5eb0895066d172e1f51f520bc65') center/cover;"></div>
+                            <h3>Bad Bunny</h3>
+                            <p>Artist</p>
+                            <button class="play-btn">▶</button>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Search Page -->
+            <section class="page" id="search-page">
+                <header class="content-header">
+                    <div class="search-bar">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z"/></svg>
+                        <input type="text" placeholder="What do you want to listen to?" id="search-input">
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <div class="user-avatar">E</div>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="search-content">
+                    <h2>Browse all</h2>
+                    <div class="genre-grid">
+                        <div class="genre-card" style="background: linear-gradient(135deg, #8400e7, #580099);">
+                            <h3>Podcasts</h3>
+                            <img src="https://i.scdn.co/image/567158eb895ad26718a814345af0fc43ee785ec5" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #1e3264, #142040);">
+                            <h3>Made For You</h3>
+                            <img src="https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #e8115b, #a80d42);">
+                            <h3>Charts</h3>
+                            <img src="https://charts-images.scdn.co/assets/locale_en/regional/weekly/region_global_default.jpg" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #148a08, #0d5c05);">
+                            <h3>New Releases</h3>
+                            <img src="https://i.scdn.co/image/ab67706f000000029249b35f23fb596b6f006a15" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #e13300, #a32600);">
+                            <h3>Pop</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #dc148c, #9f0e65);">
+                            <h3>Hip-Hop</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #8d67ab, #654a7d);">
+                            <h3>Rock</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005caf3f5eb7f19547362581a49ef7" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #503750, #382638);">
+                            <h3>Indie</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005caf7c5f6b91b32bfc67ed9e8a29" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #ba5d07, #874405);">
+                            <h3>Country</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005cafe914a07d20cec7a65e2e5dad" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #e61e32, #a61524);">
+                            <h3>R&B</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005cafa77340d409a8521bee4b7c49" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #477d95, #325667);">
+                            <h3>Chill</h3>
+                            <img src="https://i.scdn.co/image/ab67fb8200005caf3ceea7db8f8d68f3a3aa4a4e" alt="">
+                        </div>
+                        <div class="genre-card" style="background: linear-gradient(135deg, #1e3264, #142040);">
+                            <h3>Sleep</h3>
+                            <img src="https://i.scdn.co/image/ab67706f00000002b70e0223f544b1faa2e95ed0" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Library Page -->
+            <section class="page" id="library-page">
+                <header class="content-header">
+                    <h1 class="page-title">Your Library</h1>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <div class="user-avatar">E</div>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="library-content">
+                    <div class="library-filters">
+                        <button class="filter-btn active">Playlists</button>
+                        <button class="filter-btn">Albums</button>
+                        <button class="filter-btn">Artists</button>
+                        <button class="filter-btn">Podcasts</button>
+                    </div>
+
+                    <div class="library-grid">
+                        <div class="library-item">
+                            <div class="library-img gradient-liked">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </div>
+                            <div class="library-info">
+                                <h3>Liked Songs</h3>
+                                <p>Playlist • 247 songs</p>
+                            </div>
+                        </div>
+                        <div class="library-item">
+                            <div class="library-img gradient-2"></div>
+                            <div class="library-info">
+                                <h3>Chill Vibes</h3>
+                                <p>Playlist • 52 songs</p>
+                            </div>
+                        </div>
+                        <div class="library-item">
+                            <div class="library-img gradient-3"></div>
+                            <div class="library-info">
+                                <h3>Workout Mix</h3>
+                                <p>Playlist • 89 songs</p>
+                            </div>
+                        </div>
+                        <div class="library-item">
+                            <div class="library-img gradient-4"></div>
+                            <div class="library-info">
+                                <h3>Focus Flow</h3>
+                                <p>Playlist • 34 songs</p>
+                            </div>
+                        </div>
+                        <div class="library-item">
+                            <div class="library-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273b1c4b76e23414c9f20242268') center/cover;"></div>
+                            <div class="library-info">
+                                <h3>After Hours</h3>
+                                <p>Album • The Weeknd</p>
+                            </div>
+                        </div>
+                        <div class="library-item">
+                            <div class="library-img" style="background: url('https://i.scdn.co/image/ab67616d0000b273a91c10fe9472d9bd89802e5a') center/cover;"></div>
+                            <div class="library-info">
+                                <h3>Midnights</h3>
+                                <p>Album • Taylor Swift</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Synched Page - The Special Feature -->
+            <section class="page" id="synched-page">
+                <header class="content-header synched-header">
+                    <div class="synched-title">
+                        <h1>Spotify <span class="highlight">Synched</span></h1>
+                        <p class="synched-subtitle">Music that moves with your world</p>
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <div class="user-avatar">E</div>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="synched-content">
+                    <!-- Context Cards -->
+                    <div class="context-panel">
+                        <div class="context-card weather-card">
+                            <div class="context-icon">
+                                <svg id="weather-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 17a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zM3 12a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm17 0a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1zm-2.05-6.36a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0zM7.17 16.83a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0zm11.31.71a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 1 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zM7.17 7.17a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41z"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Weather</span>
+                                <span class="context-value" id="weather-value">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="context-card location-card">
+                            <div class="context-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Location</span>
+                                <span class="context-value" id="location-value">Detecting...</span>
+                            </div>
+                        </div>
+                        <div class="context-card movement-card">
+                            <div class="context-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7" transform="scale(0.6) translate(8, 8)"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Movement</span>
+                                <span class="context-value" id="movement-value">Detecting...</span>
+                            </div>
+                        </div>
+                        <div class="context-card time-card">
+                            <div class="context-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Time of Day</span>
+                                <span class="context-value" id="time-value">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Context Cards -->
+                    <div class="context-panel secondary">
+                        <div class="context-card calendar-card">
+                            <div class="context-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Next Event</span>
+                                <span class="context-value" id="calendar-value">Not connected</span>
+                            </div>
+                            <button class="context-connect-btn" id="connect-calendar">Connect</button>
+                        </div>
+                        <div class="context-card phone-card">
+                            <div class="context-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Phone Mode</span>
+                                <span class="context-value" id="phone-mode-value">Normal</span>
+                            </div>
+                            <div class="phone-mode-indicator" id="phone-mode-indicator">
+                                <span class="mode-dot"></span>
+                            </div>
+                        </div>
+                        <div class="context-card activity-card">
+                            <div class="context-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
+                            </div>
+                            <div class="context-info">
+                                <span class="context-label">Activity</span>
+                                <span class="context-value" id="activity-value">Analyzing...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calendar & Movement Integration -->
+                    <div class="smart-sync-panel">
+                        <!-- Calendar Sync Section -->
+                        <div class="calendar-sync-section" id="calendar-section">
+                            <div class="sync-header">
+                                <div class="sync-icon calendar">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+                                </div>
+                                <div class="sync-title">
+                                    <h3>📅 Calendar Sync</h3>
+                                    <p>Music that prepares you for what's next</p>
+                                </div>
+                                <span class="sync-badge" id="calendar-sync-badge">Not Connected</span>
+                            </div>
+                            <div class="calendar-not-connected" id="calendar-not-connected">
+                                <p>Connect your calendar to get music recommendations based on your upcoming events</p>
+                                <button class="connect-btn" id="connect-calendar-btn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+                                    Connect Google Calendar
+                                </button>
+                            </div>
+                            <div class="calendar-connected" id="calendar-connected" style="display: none;">
+                                <div class="upcoming-events">
+                                    <h4>Upcoming Events</h4>
+                                    <div class="events-list" id="events-list">
+                                        <!-- Populated by JS -->
+                                    </div>
+                                </div>
+                                <div class="event-playlist-preview" id="event-playlist-preview">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone Mode Section -->
+                        <div class="phone-mode-section">
+                            <div class="sync-header">
+                                <div class="sync-icon phone">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                                </div>
+                                <div class="sync-title">
+                                    <h3>📱 Phone Mode Sync</h3>
+                                    <p>Adapts to your focus & availability</p>
+                                </div>
+                                <span class="sync-badge connected" id="phone-sync-badge">Active</span>
+                            </div>
+                            <div class="phone-modes-grid">
+                                <div class="phone-mode-option" data-mode="normal">
+                                    <div class="mode-icon normal">📱</div>
+                                    <span>Normal</span>
+                                    <div class="mode-check" id="mode-normal-check">✓</div>
+                                </div>
+                                <div class="phone-mode-option" data-mode="dnd">
+                                    <div class="mode-icon dnd">🔕</div>
+                                    <span>Do Not Disturb</span>
+                                    <div class="mode-check" id="mode-dnd-check"></div>
+                                </div>
+                                <div class="phone-mode-option" data-mode="focus">
+                                    <div class="mode-icon focus">🎯</div>
+                                    <span>Focus Mode</span>
+                                    <div class="mode-check" id="mode-focus-check"></div>
+                                </div>
+                                <div class="phone-mode-option" data-mode="sleep">
+                                    <div class="mode-icon sleep">😴</div>
+                                    <span>Sleep Mode</span>
+                                    <div class="mode-check" id="mode-sleep-check"></div>
+                                </div>
+                                <div class="phone-mode-option" data-mode="driving">
+                                    <div class="mode-icon driving">🚗</div>
+                                    <span>Driving Mode</span>
+                                    <div class="mode-check" id="mode-driving-check"></div>
+                                </div>
+                                <div class="phone-mode-option" data-mode="workout">
+                                    <div class="mode-icon workout">💪</div>
+                                    <span>Workout Mode</span>
+                                    <div class="mode-check" id="mode-workout-check"></div>
+                                </div>
+                            </div>
+                            <div class="mode-playlist-info" id="mode-playlist-info">
+                                <p>📱 <strong>Normal mode</strong> - Playing your regular mix</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Movement/Commute Destinations -->
+                    <div class="movement-destinations-section">
+                        <div class="section-header-row">
+                            <h2>🚶 Where are you headed?</h2>
+                            <span class="sync-status">Quick Select</span>
+                        </div>
+                        <div class="destinations-grid">
+                            <button class="destination-btn" data-destination="gym">
+                                <span class="dest-icon">🏋️</span>
+                                <span class="dest-name">Gym</span>
+                                <span class="dest-desc">Pump-up playlist</span>
+                            </button>
+                            <button class="destination-btn" data-destination="class">
+                                <span class="dest-icon">📚</span>
+                                <span class="dest-name">Class</span>
+                                <span class="dest-desc">Focus & study vibes</span>
+                            </button>
+                            <button class="destination-btn" data-destination="work">
+                                <span class="dest-icon">💼</span>
+                                <span class="dest-name">Work</span>
+                                <span class="dest-desc">Motivating commute</span>
+                            </button>
+                            <button class="destination-btn" data-destination="home">
+                                <span class="dest-icon">🏠</span>
+                                <span class="dest-name">Home</span>
+                                <span class="dest-desc">Wind down tunes</span>
+                            </button>
+                            <button class="destination-btn" data-destination="coffee">
+                                <span class="dest-icon">☕</span>
+                                <span class="dest-name">Coffee Shop</span>
+                                <span class="dest-desc">Café ambiance</span>
+                            </button>
+                            <button class="destination-btn" data-destination="date">
+                                <span class="dest-icon">💕</span>
+                                <span class="dest-name">Date Night</span>
+                                <span class="dest-desc">Romantic mood setter</span>
+                            </button>
+                            <button class="destination-btn" data-destination="party">
+                                <span class="dest-icon">🎉</span>
+                                <span class="dest-name">Party</span>
+                                <span class="dest-desc">Pre-game energy</span>
+                            </button>
+                            <button class="destination-btn" data-destination="run">
+                                <span class="dest-icon">🏃</span>
+                                <span class="dest-name">Running</span>
+                                <span class="dest-desc">High BPM cardio</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Commute/Movement Playlists -->
+                    <section class="synched-section" id="movement-playlists-section" style="display: none;">
+                        <div class="section-header-row">
+                            <h2 id="movement-section-title">🚶 Walking to Gym</h2>
+                            <span class="sync-status">Movement Synced</span>
+                        </div>
+                        <div class="card-grid" id="movement-playlists"></div>
+                    </section>
+
+                    <!-- Calendar Event Playlists -->
+                    <section class="synched-section" id="calendar-playlists-section" style="display: none;">
+                        <div class="section-header-row">
+                            <h2 id="calendar-section-title">📅 Pre-Meeting Energy</h2>
+                            <span class="sync-status">Calendar Synced</span>
+                        </div>
+                        <div class="card-grid" id="calendar-playlists"></div>
+                    </section>
+
+                    <!-- Phone Mode Playlists -->
+                    <section class="synched-section" id="phone-mode-playlists-section" style="display: none;">
+                        <div class="section-header-row">
+                            <h2 id="phone-mode-section-title">📱 Focus Mode Mix</h2>
+                            <span class="sync-status">Mode Synced</span>
+                        </div>
+                        <div class="card-grid" id="phone-mode-playlists"></div>
+                    </section>
+
+                    <!-- AI Recommendation Banner -->
+                    <div class="ai-recommendation-banner">
+                        <div class="ai-visual">
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring delay-1"></div>
+                            <div class="pulse-ring delay-2"></div>
+                            <div class="ai-core"></div>
+                        </div>
+                        <div class="ai-text">
+                            <h2 id="ai-recommendation-title">Syncing your perfect playlist...</h2>
+                            <p id="ai-recommendation-desc">Based on your current context and listening habits</p>
+                        </div>
+                    </div>
+
+                    <!-- Photo & BeReal Section -->
+                    <div class="photo-integration-panel">
+                        <!-- Photo Upload -->
+                        <div class="photo-upload-section">
+                            <div class="section-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                            </div>
+                            <div class="upload-content">
+                                <h3>📸 Photo Vibes</h3>
+                                <p>Upload a photo and we'll create a playlist that matches the mood</p>
+                                <div class="upload-area" id="upload-area">
+                                    <input type="file" id="photo-upload" accept="image/*" hidden>
+                                    <div class="upload-placeholder" id="upload-placeholder">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                                        <span>Drop image here or click to upload</span>
+                                    </div>
+                                    <div class="upload-preview" id="upload-preview" style="display: none;">
+                                        <img id="preview-image" src="" alt="Uploaded photo">
+                                        <button class="remove-photo-btn" id="remove-photo">×</button>
+                                    </div>
+                                </div>
+                                <button class="generate-btn" id="generate-from-photo" disabled>
+                                    <span>Generate Playlist</span>
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+                                </button>
+                            </div>
+                            <div class="photo-analysis" id="photo-analysis" style="display: none;">
+                                <h4>AI Analysis</h4>
+                                <div class="analysis-tags" id="analysis-tags"></div>
+                            </div>
+                        </div>
+
+                        <!-- BeReal Integration -->
+                        <div class="bereal-section">
+                            <div class="bereal-header">
+                                <div class="bereal-logo">
+                                    <span class="bereal-icon">⚡</span>
+                                    <span>BeReal</span>
+                                </div>
+                                <span class="integration-badge">Integration</span>
+                            </div>
+                            <div class="bereal-content">
+                                <p>Connect BeReal for real-time mood detection from your daily photos</p>
+                                <div class="bereal-status" id="bereal-status">
+                                    <div class="status-indicator disconnected"></div>
+                                    <span>Not Connected</span>
+                                </div>
+                                <button class="bereal-connect-btn" id="bereal-connect">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    Connect BeReal
+                                </button>
+                            </div>
+                            <div class="bereal-connected" id="bereal-connected" style="display: none;">
+                                <div class="bereal-photo-preview">
+                                    <div class="bereal-dual-cam">
+                                        <div class="bereal-main" id="bereal-main"></div>
+                                        <div class="bereal-selfie" id="bereal-selfie"></div>
+                                    </div>
+                                    <div class="bereal-time">Today at <span id="bereal-time">2:34 PM</span></div>
+                                </div>
+                                <div class="bereal-detected">
+                                    <h4>Detected from BeReal</h4>
+                                    <div class="detected-tags" id="bereal-tags">
+                                        <span class="tag mood">😊 Happy</span>
+                                        <span class="tag activity">💻 Working</span>
+                                        <span class="tag location">🏠 Home</span>
+                                    </div>
+                                </div>
+                                <button class="sync-bereal-btn" id="sync-bereal">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                                    Sync Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mood Mixer Section -->
+                    <div class="mood-mixer-section">
+                        <div class="mood-mixer-header">
+                            <h2>🎭 Mood Mixer</h2>
+                            <p>Blend your emotions to create the perfect playlist</p>
+                        </div>
+                        <div class="mood-sliders">
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">😊</span>
+                                    <span class="mood-name">Happy</span>
+                                    <span class="mood-value" id="happy-value">50%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="50" class="mood-range" id="mood-happy" data-mood="happy">
+                                <div class="mood-bar-bg happy"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">😢</span>
+                                    <span class="mood-name">Sad</span>
+                                    <span class="mood-value" id="sad-value">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" class="mood-range" id="mood-sad" data-mood="sad">
+                                <div class="mood-bar-bg sad"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">⚡</span>
+                                    <span class="mood-name">Energetic</span>
+                                    <span class="mood-value" id="energetic-value">30%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="30" class="mood-range" id="mood-energetic" data-mood="energetic">
+                                <div class="mood-bar-bg energetic"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">😌</span>
+                                    <span class="mood-name">Calm</span>
+                                    <span class="mood-value" id="calm-value">20%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="20" class="mood-range" id="mood-calm" data-mood="calm">
+                                <div class="mood-bar-bg calm"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">😠</span>
+                                    <span class="mood-name">Angry</span>
+                                    <span class="mood-value" id="angry-value">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" class="mood-range" id="mood-angry" data-mood="angry">
+                                <div class="mood-bar-bg angry"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">🥰</span>
+                                    <span class="mood-name">Romantic</span>
+                                    <span class="mood-value" id="romantic-value">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" class="mood-range" id="mood-romantic" data-mood="romantic">
+                                <div class="mood-bar-bg romantic"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">🤔</span>
+                                    <span class="mood-name">Nostalgic</span>
+                                    <span class="mood-value" id="nostalgic-value">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" class="mood-range" id="mood-nostalgic" data-mood="nostalgic">
+                                <div class="mood-bar-bg nostalgic"></div>
+                            </div>
+                            <div class="mood-slider-item">
+                                <div class="mood-label">
+                                    <span class="mood-emoji">🎉</span>
+                                    <span class="mood-name">Party</span>
+                                    <span class="mood-value" id="party-value">0%</span>
+                                </div>
+                                <input type="range" min="0" max="100" value="0" class="mood-range" id="mood-party" data-mood="party">
+                                <div class="mood-bar-bg party"></div>
+                            </div>
+                        </div>
+                        <div class="mood-visualization">
+                            <div class="mood-blend-preview" id="mood-blend-preview">
+                                <div class="blend-circle" id="blend-circle"></div>
+                            </div>
+                            <div class="mood-summary">
+                                <h4>Your Mood Blend</h4>
+                                <p id="mood-description">Mostly happy with a touch of energy</p>
+                            </div>
+                        </div>
+                        <button class="generate-mood-btn" id="generate-mood-playlist">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                            Generate Mood Playlist
+                        </button>
+                    </div>
+
+                    <!-- Photo Generated Playlists -->
+                    <section class="synched-section" id="photo-playlists-section" style="display: none;">
+                        <div class="section-header-row">
+                            <h2>📸 From Your Photo</h2>
+                            <span class="sync-status">AI Generated</span>
+                        </div>
+                        <div class="card-grid" id="photo-playlists"></div>
+                    </section>
+
+                    <!-- Mood Generated Playlists -->
+                    <section class="synched-section" id="mood-playlists-section" style="display: none;">
+                        <div class="section-header-row">
+                            <h2>🎭 Mood Mix Playlists</h2>
+                            <span class="sync-status">Custom Blend</span>
+                        </div>
+                        <div class="card-grid" id="mood-playlists"></div>
+                    </section>
+
+                    <!-- Synched Playlists -->
+                    <section class="synched-section">
+                        <div class="section-header-row">
+                            <h2>🌤️ Weather-Synched</h2>
+                            <span class="sync-status">Live</span>
+                        </div>
+                        <div class="card-grid" id="weather-playlists">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <section class="synched-section">
+                        <div class="section-header-row">
+                            <h2>📍 Location Vibes</h2>
+                            <span class="sync-status">Live</span>
+                        </div>
+                        <div class="card-grid" id="location-playlists">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <section class="synched-section">
+                        <div class="section-header-row">
+                            <h2>⏰ Perfect for Right Now</h2>
+                            <span class="sync-status">Live</span>
+                        </div>
+                        <div class="card-grid" id="time-playlists">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <section class="synched-section">
+                        <div class="section-header-row">
+                            <h2>🎯 Based on Your Activity</h2>
+                            <span class="sync-status">Learning</span>
+                        </div>
+                        <div class="card-grid" id="activity-playlists">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- Spotify Lock Page -->
+            <section class="page" id="lock-page">
+                <header class="content-header lock-header">
+                    <div class="lock-title">
+                        <h1>Spotify <span class="highlight-lock">Lock</span></h1>
+                        <p class="lock-subtitle">Stay focused. Earn your music.</p>
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <div class="user-avatar">E</div>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="lock-content">
+                    <!-- Focus Status Banner -->
+                    <div class="focus-status-banner" id="focus-status-banner">
+                        <div class="focus-visual">
+                            <div class="focus-ring"></div>
+                            <div class="focus-icon" id="focus-icon">🔓</div>
+                        </div>
+                        <div class="focus-info">
+                            <h2 id="focus-status-title">Music Unlocked</h2>
+                            <p id="focus-status-desc">All your music is available. Start a focus session to earn rewards!</p>
+                        </div>
+                        <div class="focus-timer" id="focus-timer" style="display: none;">
+                            <span class="timer-label">Session Time</span>
+                            <span class="timer-value" id="timer-value">00:00:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Integration -->
+                    <div class="canvas-integration-panel">
+                        <div class="canvas-header">
+                            <div class="canvas-logo">
+                                <div class="canvas-icon">📚</div>
+                                <span>Canvas LMS</span>
+                            </div>
+                            <span class="integration-badge" id="canvas-badge">Not Connected</span>
+                        </div>
+                        
+                        <div class="canvas-not-connected" id="canvas-not-connected">
+                            <p>Connect Canvas to track assignments and auto-lock distracting music when you need to focus</p>
+                            <button class="canvas-connect-btn" id="connect-canvas">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                Connect Canvas
+                            </button>
+                        </div>
+
+                        <div class="canvas-connected" id="canvas-connected" style="display: none;">
+                            <div class="assignments-section">
+                                <h4>📋 Upcoming Assignments</h4>
+                                <div class="assignments-list" id="assignments-list">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div class="canvas-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="assignments-due">3</span>
+                                    <span class="stat-label">Due This Week</span>
+                                </div>
+                                <div class="stat-item urgent">
+                                    <span class="stat-value" id="overdue-count">1</span>
+                                    <span class="stat-label">Overdue</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="focus-hours">12.5</span>
+                                    <span class="stat-label">Focus Hours</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Focus Session Setup -->
+                    <div class="focus-session-panel">
+                        <h3>🎯 Start a Focus Session</h3>
+                        <p>Set a time limit and assignment. Distracting music will be locked until you're done!</p>
+                        
+                        <div class="session-setup">
+                            <div class="setup-row">
+                                <label>Assignment</label>
+                                <select id="session-assignment">
+                                    <option value="">Select assignment...</option>
+                                    <option value="essay">Research Essay - English 101</option>
+                                    <option value="problem-set">Problem Set 5 - Calculus II</option>
+                                    <option value="reading">Chapter 8 Reading - Psychology</option>
+                                    <option value="project">Group Project - Marketing</option>
+                                    <option value="custom">Custom Task</option>
+                                </select>
+                            </div>
+                            
+                            <div class="setup-row">
+                                <label>Time Estimate</label>
+                                <div class="time-input-group">
+                                    <button class="time-btn" data-time="15">15m</button>
+                                    <button class="time-btn" data-time="30">30m</button>
+                                    <button class="time-btn active" data-time="60">1hr</button>
+                                    <button class="time-btn" data-time="90">1.5hr</button>
+                                    <button class="time-btn" data-time="120">2hr</button>
+                                    <input type="number" id="custom-time" placeholder="Custom" min="5" max="480">
+                                </div>
+                            </div>
+
+                            <div class="setup-row">
+                                <label>Lock Intensity</label>
+                                <div class="intensity-options">
+                                    <button class="intensity-btn" data-intensity="light">
+                                        <span class="intensity-icon">🔒</span>
+                                        <span class="intensity-name">Light</span>
+                                        <span class="intensity-desc">Lock party & hype music</span>
+                                    </button>
+                                    <button class="intensity-btn active" data-intensity="medium">
+                                        <span class="intensity-icon">🔐</span>
+                                        <span class="intensity-name">Medium</span>
+                                        <span class="intensity-desc">Only focus music allowed</span>
+                                    </button>
+                                    <button class="intensity-btn" data-intensity="strict">
+                                        <span class="intensity-icon">⛔</span>
+                                        <span class="intensity-name">Strict</span>
+                                        <span class="intensity-desc">Instrumental only</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button class="start-session-btn" id="start-session">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                Start Focus Session
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Active Session Panel (hidden by default) -->
+                    <div class="active-session-panel" id="active-session" style="display: none;">
+                        <div class="session-progress">
+                            <div class="progress-circle" id="progress-circle">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="progress-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="progress-fill" cx="50" cy="50" r="45" id="progress-fill"/>
+                                </svg>
+                                <div class="progress-content">
+                                    <span class="progress-time" id="session-time-left">60:00</span>
+                                    <span class="progress-label">remaining</span>
+                                </div>
+                            </div>
+                            <div class="session-details">
+                                <h3 id="session-assignment-name">Research Essay</h3>
+                                <p id="session-lock-level">🔐 Medium Lock Active</p>
+                                <div class="session-stats">
+                                    <span>🎵 <span id="locked-songs-count">47</span> songs locked</span>
+                                    <span>✅ <span id="focus-score">92%</span> focus score</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="session-controls">
+                            <button class="session-btn pause" id="pause-session">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                                Pause
+                            </button>
+                            <button class="session-btn extend" id="extend-session">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                                +15 min
+                            </button>
+                            <button class="session-btn end" id="end-session">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg>
+                                End Session
+                            </button>
+                        </div>
+
+                        <div class="overtime-warning" id="overtime-warning" style="display: none;">
+                            <div class="warning-icon">⚠️</div>
+                            <div class="warning-text">
+                                <h4>Time's Up!</h4>
+                                <p>You've gone <span id="overtime-amount">15 minutes</span> over your estimate. Music is still locked to help you finish.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Locked Songs Section -->
+                    <div class="locked-songs-section">
+                        <div class="section-header-row">
+                            <h2>🔒 Currently Locked</h2>
+                            <span class="lock-count" id="lock-count">0 songs</span>
+                        </div>
+                        <div class="locked-songs-grid" id="locked-songs-grid">
+                            <div class="no-locks-message" id="no-locks-message">
+                                <span class="no-locks-icon">🎵</span>
+                                <p>No songs are locked. Start a focus session to lock distracting music!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Focus Music Section -->
+                    <section class="lock-section">
+                        <div class="section-header-row">
+                            <h2>🧠 Focus-Approved Music</h2>
+                            <span class="sync-status available">Always Available</span>
+                        </div>
+                        <div class="card-grid" id="focus-music-playlists">
+                            <div class="music-card focus-approved">
+                                <div class="card-img" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                                <h3>Deep Focus</h3>
+                                <p>Proven concentration boosters</p>
+                                <span class="approved-badge">✓ Unlocked</span>
+                                <button class="play-btn">▶</button>
+                            </div>
+                            <div class="music-card focus-approved">
+                                <div class="card-img" style="background: linear-gradient(135deg, #11998e, #38ef7d);"></div>
+                                <h3>Study Beats</h3>
+                                <p>Lo-fi for learning</p>
+                                <span class="approved-badge">✓ Unlocked</span>
+                                <button class="play-btn">▶</button>
+                            </div>
+                            <div class="music-card focus-approved">
+                                <div class="card-img" style="background: linear-gradient(135deg, #4facfe, #00f2fe);"></div>
+                                <h3>Classical Focus</h3>
+                                <p>Mozart effect & more</p>
+                                <span class="approved-badge">✓ Unlocked</span>
+                                <button class="play-btn">▶</button>
+                            </div>
+                            <div class="music-card focus-approved">
+                                <div class="card-img" style="background: linear-gradient(135deg, #a8edea, #fed6e3);"></div>
+                                <h3>Ambient Study</h3>
+                                <p>Peaceful background sounds</p>
+                                <span class="approved-badge">✓ Unlocked</span>
+                                <button class="play-btn">▶</button>
+                            </div>
+                            <div class="music-card focus-approved">
+                                <div class="card-img" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);"></div>
+                                <h3>Coffee Shop</h3>
+                                <p>Café ambiance for focus</p>
+                                <span class="approved-badge">✓ Unlocked</span>
+                                <button class="play-btn">▶</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Focus History -->
+                    <section class="lock-section">
+                        <div class="section-header-row">
+                            <h2>📊 Focus History</h2>
+                            <a href="#" class="show-all">View All</a>
+                        </div>
+                        <div class="focus-history-grid">
+                            <div class="history-card">
+                                <div class="history-date">Today</div>
+                                <div class="history-stats">
+                                    <span class="history-time">2.5 hrs</span>
+                                    <span class="history-score">94% focus</span>
+                                </div>
+                                <div class="history-task">Research Essay</div>
+                            </div>
+                            <div class="history-card">
+                                <div class="history-date">Yesterday</div>
+                                <div class="history-stats">
+                                    <span class="history-time">1.5 hrs</span>
+                                    <span class="history-score">87% focus</span>
+                                </div>
+                                <div class="history-task">Problem Set 5</div>
+                            </div>
+                            <div class="history-card">
+                                <div class="history-date">Mon, Jan 27</div>
+                                <div class="history-stats">
+                                    <span class="history-time">3 hrs</span>
+                                    <span class="history-score">91% focus</span>
+                                </div>
+                                <div class="history-task">Chapter Reading</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <!-- Now Playing Bar -->
+        <footer class="now-playing-bar">
+            <div class="now-playing-left">
+                <div class="now-playing-img"></div>
+                <div class="now-playing-info">
+                    <span class="track-name">Blinding Lights</span>
+                    <span class="artist-name">The Weeknd</span>
+                </div>
+                <button class="like-btn">♡</button>
+            </div>
+            <div class="now-playing-center">
+                <div class="player-controls">
+                    <button class="control-btn shuffle">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+                    </button>
+                    <button class="control-btn prev">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    <button class="control-btn play-pause">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button class="control-btn next">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    </button>
+                    <button class="control-btn repeat">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+                    </button>
+                </div>
+                <div class="progress-container">
+                    <span class="time-elapsed">1:23</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%"></div>
+                    </div>
+                    <span class="time-total">3:20</span>
+                </div>
+            </div>
+            <div class="now-playing-right">
+                <button class="control-btn lyrics">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </button>
+                <button class="control-btn queue">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/></svg>
+                </button>
+                <button class="control-btn devices">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+                </button>
+                <div class="volume-control">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <div class="volume-bar">
+                        <div class="volume-fill" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
