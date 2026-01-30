@@ -1,4 +1,4 @@
-🎵 Twisted Spotify Features
+🎵 Spotify Synced Features
 
 Welcome to the ultimate productivity + music experience!
 This is our playful extension to Spotify that adds features to help you focus, reward your productivity, and sometimes roast you if you get off track. Perfect for students, professionals, or anyone who wants music to actually work for them
